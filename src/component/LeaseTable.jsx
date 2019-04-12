@@ -1,9 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import _ from 'lodash';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import Paper from '@material-ui/core/Paper';
 import DynamicTableComp from './DynamicTableComp';
+import { closeLeaseInformationTable } from '../actions/actions';
 const styles = theme => ({
   root: {
     width: '50%',
@@ -18,25 +20,31 @@ const styles = theme => ({
 const header = [[{data: 'From'}, {data: 'To'}, {data: 'Days'}, {data: 'Amount'}]];
 
 const LeaseTable = (props) => {
-  const { matrix, classes } = props;
+  let { classes, leaseInformation, closeLeaseInformationTable } = props;
   return (
+    leaseInformation ?
     <Paper className={classes.root}>
+      <button onClick={closeLeaseInformationTable}>Cancel</button>
       <Table className={classes.table}>
         <DynamicTableComp
           matrix={header}
           isTableBody={false}
         />
         <DynamicTableComp
-          matrix={matrix}
+          matrix={leaseInformation}
           isTableBody={true}
         />
       </Table>
-    </Paper>
+    </Paper> : ''
   );
 };
 
-LeaseTable.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+const mapStateToUIvalues = (state) =>
+  _.map(state.loadedLeaseInformation.rents, rent => _.map(rent, val => ({data: val})));
 
-export default withStyles(styles)(LeaseTable);
+const mapStateToProps = state => ({ leaseInformation: mapStateToUIvalues(state) });
+const mapDispatchToProps = dispatch => ({
+  closeLeaseInformationTable: () => dispatch(closeLeaseInformationTable()),
+});
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(LeaseTable));

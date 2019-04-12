@@ -16,6 +16,7 @@ const acquireLeaseInformation = (id) => ({
 
 const closeLeaseInformationTable = () => ({
   type: CLOSE_LEASE_INFORMATION_TABLE,
+  payload: null,
 });
 
 export {

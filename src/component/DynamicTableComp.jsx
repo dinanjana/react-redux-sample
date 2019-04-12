@@ -5,6 +5,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 const DynamicTableComp = ({ matrix, isTableBody }) => {
+  console.log(`DynamicTableComp: ${JSON.stringify(matrix)}`);
   return isTableBody ?
     (<TableBody>
       {
