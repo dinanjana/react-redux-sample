@@ -1,5 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-This was created to test out what's new on react and redux 
+This was created to test out what's new on react and redux.
+In this example a web app renders a list of rentals with due period for a given list of leases
+This web app utilizes material UI, React, Redux, React-Redux, Redux Promise Middleware, axios, Moment and
+lodash
 
 ## Available Scripts
 
