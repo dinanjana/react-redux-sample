@@ -14,3 +14,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+window.store = () => leaseStore.getState()

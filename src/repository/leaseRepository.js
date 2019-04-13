@@ -18,7 +18,7 @@ const getLeases = async () => {
 };
 
 const getLeaseInfo = async (id) => {
-  return makeReq(`${BASE_URL}/id`);
+  return makeReq(`${BASE_URL}/${id}`);
 };
 
 export {

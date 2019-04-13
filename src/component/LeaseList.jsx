@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import LeaseEntry from './LeaseEntry';
+import ErrorMessageComp from './ErrorMessageComp';
 import { acquireLeaseInformation } from '../actions/actions';
 
 const styles = theme => ({
@@ -18,6 +19,7 @@ const LeaseList =(props) => {
   const { classes, leaseList, acquireLeaseInformation } = props;
   return (
     <div className={classes.root}>
+      <ErrorMessageComp/>
       <List component="nav">
         {leaseList.map(({id, tenant}) =>
           (<LeaseEntry
