@@ -7,8 +7,9 @@ import { acquireLeaseInformation } from '../actions/actions';
 
 const styles = theme => ({
   root: {
+    display: 'flex',
     width: '100%',
-    maxWidth: 360,
+    maxWidth: 720,
     backgroundColor: theme.palette.background.paper,
   },
 });

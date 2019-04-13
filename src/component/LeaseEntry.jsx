@@ -20,7 +20,7 @@ const LeaseEntry =
     >
       <ListItemText primary={lease} secondary={tenant}/>
     </ListItem>
-    <LeaseTable/>
+    <LeaseTable tenant={tenant}/>
   </div>
   );
 };

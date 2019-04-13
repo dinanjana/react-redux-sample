@@ -12,27 +12,29 @@ import { extractLeaseInfo } from '../logic/LeaseManager';
 
 const initialState = {
   leaseList: [],
+  selectedTenant: null,
   loadedLeaseInformation: {
     rents: [[]],
   },
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(`${action.type}`);
   switch (action.type) {
     case ACQUIRE_LEASES_FULFILLED:
       return {
         leaseList: action.payload.data,
         loadedLeaseInformation: state.loadedLeaseInformation,
       };
-    case ACQUIRE_LEASE_INFORMATION_FULFILLED: //We may not need to store this
+    case ACQUIRE_LEASE_INFORMATION_FULFILLED:
       return {
         leaseList: state.leaseList,
-        loadedLeaseInformation: extractLeaseInfo(action.payload.data),
+        loadedLeaseInformation: extractLeaseInfo(action.payload.lease.data),
+        selectedTenant: action.payload.id,
       };
     case CLOSE_LEASE_INFORMATION_TABLE:
       return {
         leaseList: state.leaseList,
+        selectedTenant: null,
         loadedLeaseInformation: {
           rents: [[]]
         },

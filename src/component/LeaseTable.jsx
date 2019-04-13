@@ -8,7 +8,7 @@ import DynamicTableComp from './DynamicTableComp';
 import { closeLeaseInformationTable } from '../actions/actions';
 const styles = theme => ({
   root: {
-    width: '50%',
+    width: '100%',
     marginTop: theme.spacing.unit * 3,
     overflowX: 'auto',
   },
@@ -20,9 +20,9 @@ const styles = theme => ({
 const header = [[{data: 'From'}, {data: 'To'}, {data: 'Days'}, {data: 'Amount'}]];
 
 const LeaseTable = (props) => {
-  let { classes, leaseInformation, closeLeaseInformationTable } = props;
+  let { classes, leaseInformation, closeLeaseInformationTable, tenant, selectedTenant } = props;
   return (
-    leaseInformation ?
+    !_.isNil(selectedTenant) && tenant === selectedTenant ?
     <Paper className={classes.root}>
       <button onClick={closeLeaseInformationTable}>Cancel</button>
       <Table className={classes.table}>
@@ -42,7 +42,7 @@ const LeaseTable = (props) => {
 const mapStateToUIvalues = (state) =>
   _.map(state.loadedLeaseInformation.rents, rent => _.map(rent, val => ({data: val})));
 
-const mapStateToProps = state => ({ leaseInformation: mapStateToUIvalues(state) });
+const mapStateToProps = state => ({ selectedTenant: state.selectedTenant, leaseInformation: mapStateToUIvalues(state) });
 const mapDispatchToProps = dispatch => ({
   closeLeaseInformationTable: () => dispatch(closeLeaseInformationTable()),
 });

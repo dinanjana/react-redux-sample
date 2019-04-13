@@ -27,5 +27,13 @@ const WEEK_DAYS = {
   THURSDAY,
   FRIDAY,
 };
+
+const BASE_URL = 'https://hiring-task-api.herokuapp.com/v1/leases';
+
+const DATE_FORMAT = 'MMMM, Do, YYYY';
+const UNIT_OF_TIME = {
+  DAYS: 'days',
+};
+
 const WEEK = [SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY];
-export { FREQUENCIES, WEEK_DAYS, WEEK };
+export { FREQUENCIES, WEEK_DAYS, WEEK, BASE_URL, DATE_FORMAT, UNIT_OF_TIME };

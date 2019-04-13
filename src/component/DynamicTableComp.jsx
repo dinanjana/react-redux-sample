@@ -5,13 +5,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 const DynamicTableComp = ({ matrix, isTableBody }) => {
-  console.log(`DynamicTableComp: ${JSON.stringify(matrix)}`);
   return isTableBody ?
     (<TableBody>
       {
         matrix.map(row => (
-          <TableRow> { row.map(col =>
-            (<TableCell align="center">{col.data}</TableCell>))
+          <TableRow>{ row.map(col =>
+            (<TableCell align="left">{col.data}</TableCell>))
           }</TableRow>)
         )}
     </TableBody>) :
@@ -19,7 +18,7 @@ const DynamicTableComp = ({ matrix, isTableBody }) => {
       <TableRow>
         {
           matrix[0].map(col =>
-            (<TableCell align="center">{col.data}</TableCell>))
+            (<TableCell align="left">{col.data}</TableCell>))
         }
       </TableRow>
     </TableHead>);

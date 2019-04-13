@@ -11,7 +11,7 @@ const acquireLeases = () => ({
 
 const acquireLeaseInformation = (id) => ({
   type: ACQUIRE_LEASE_INFORMATION,
-  payload: getLeaseInfo(id)
+  payload: getLeaseInfo(id).then((data) => ({id, lease: data})),
 });
 
 const closeLeaseInformationTable = () => ({

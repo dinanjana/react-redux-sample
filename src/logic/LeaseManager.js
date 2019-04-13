@@ -3,7 +3,7 @@
  */
 import _ from 'lodash';
 import moment from 'moment';
-import { FREQUENCIES, WEEK } from '../Constants';
+import { FREQUENCIES, WEEK, DATE_FORMAT, UNIT_OF_TIME } from '../Constants';
 
 const extractLeaseInfo = (data) => {
   if (_.isNil(data))
@@ -29,22 +29,22 @@ const getDayForPaymentDay = (start, payDay, partialTerm) => {
   if (WEEK[start.day()] === payDay) {
     return partialTerm;
   }
-  start.add(1, 'days');
+  start.add(1, UNIT_OF_TIME.DAYS);
   return getDayForPaymentDay(start, payDay, ++partialTerm);
 };
 
 const createRentList = (start, end, term, rent, weeklyRent, list) => {
   const rentInfo = {
-    from: start.format('MMMM, Do, YYYY'),
+    from: start.format(DATE_FORMAT),
   };
-  start.add(term - 1, 'days');
-  rentInfo.to = start.format('MMMM, Do, YYYY');
+  start.add(term - 1, UNIT_OF_TIME.DAYS);
+  rentInfo.to = start.format(DATE_FORMAT);
   rentInfo.days = term;
   rentInfo.rent = rent;
-  start.add(1, 'days');
-  const diff = end.diff(start, 'days');
+  start.add(1, UNIT_OF_TIME.DAYS);
+  const diff = end.diff(start, UNIT_OF_TIME.DAYS);
   if (diff < 0) {
-    rentInfo.to = start.add(diff, 'days').format('MMMM, Do, YYYY');
+    rentInfo.to = start.add(diff, UNIT_OF_TIME.DAYS).format(DATE_FORMAT);
     rentInfo.days = term + diff;
     rentInfo.rent = ((weeklyRent/7)*(term + diff)).toFixed(2);
     list.push(rentInfo);
@@ -59,11 +59,11 @@ const getLeasePaymentsList = (to, from, payday, term, weeklyRent, rent) => {
   const partialTerm = getDayForPaymentDay(startDate, payday, 0);
   const endDate = moment(to);
   const rentList = [];
-  const formattedStartDate = startDate.format('MMMM, Do, YYYY');
-  startDate.add(partialTerm, 'days');
+  const formattedStartDate = startDate.format(DATE_FORMAT);
+  startDate.add(partialTerm, UNIT_OF_TIME.DAYS);
   rentList.push({
     from: formattedStartDate,
-    to: startDate.format('MMMM, Do, YYYY'),
+    to: startDate.format(DATE_FORMAT),
     days: partialTerm,
     rent: ((weeklyRent/7)*partialTerm).toFixed(2),
   });
